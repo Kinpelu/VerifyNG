@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96">
+  <defs>
+    <linearGradient id="g" x1="100%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#6E6CFF"/>
+      <stop offset="50%" stop-color="#4B49F2"/>
+      <stop offset="100%" stop-color="#3330C4"/>
+    </linearGradient>
+  </defs>
+  <rect width="96" height="96" rx="21" fill="url(#g)"/>
+  <!-- Glyph: scan frame, four open corners, containing a check mark (6px stroke, 96 grid) -->
+  <path d="M14 14h22M14 14v22M70 14h-22M70 14v22M14 70h22M14 70v-22M70 70h-22M70 70v-22" stroke="white" stroke-width="6" stroke-linecap="round"/>
+  <path d="M27 48 41 62 65 38" stroke="white" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

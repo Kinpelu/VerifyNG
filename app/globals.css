@@ -1,0 +1,166 @@
+@import "tailwindcss";
+
+/* === Design tokens: VerifyNG Visual Style Guide ===
+   Dark theme (default). Light theme override lives in [data-theme="light"]. */
+:root {
+  /* 2.1 Dark theme */
+  --color-ink: #0B0D1A;        /* app background */
+  --color-surface: #14172B;    /* cards, bottom bar, list rows */
+  --color-raised: #1C2040;     /* inputs, segmented controls, secondary buttons */
+  --color-line: #2A2F55;       /* borders and dividers */
+  --color-indigo: #4B49F2;     /* primary actions, active tab */
+  --color-glow: #7C83FF;       /* scan line, focus ring, reg-number text, links */
+  --color-text: #F4F5FB;       /* primary text */
+  --color-muted: #9AA0C3;      /* secondary text, captions, placeholders */
+
+  /* 2.2 Status colors (dark) */
+  --color-registered: #2ECC8F;
+  --color-not-found: #FFB020;
+  --color-expired: #FF7A45;
+  --color-report: #FF5470;
+
+  /* RGB variants for opacity tints (status tint fill 14%) */
+  --color-registered-rgb: 46, 204, 143;
+  --color-not-found-rgb: 255, 176, 32;
+  --color-expired-rgb: 255, 122, 69;
+  --color-report-rgb: 255, 84, 112;
+  --color-indigo-rgb: 75, 73, 242;
+  --color-glow-rgb: 124, 131, 255;
+
+  /* 3. Typography variables */
+  --font-sans: "Plus Jakarta Sans", system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, "Menlo", monospace;
+}
+
+/* 2.3 Light theme override (status colors darkened for 4.5:1 on white) */
+[data-theme="light"] {
+  --color-ink: #F6F7FC;        /* ground */
+  --color-surface: #FFFFFF;
+  --color-raised: #F1F3F8;     /* inputs / secondary surfaces */
+  --color-line: #DDE0F0;
+  --color-indigo: #4B49F2;     /* unchanged */
+  --color-glow: #4B49F2;       /* reg-number text / links use indigo in light */
+  --color-text: #14172B;
+  --color-muted: #5A6090;
+
+  --color-registered: #0B7A55;
+  --color-not-found: #B45309;
+  --color-expired: #C2410C;
+  --color-report: #D61F4B;
+
+  --color-registered-rgb: 11, 122, 85;
+  --color-not-found-rgb: 180, 83, 9;
+  --color-expired-rgb: 194, 65, 12;
+  --color-report-rgb: 214, 31, 75;
+  --color-indigo-rgb: 75, 73, 242;
+  --color-glow-rgb: 75, 73, 242;
+}
+
+@theme inline {
+  --color-background: var(--color-ink);
+  --color-foreground: var(--color-text);
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+
+  --color-ink: var(--color-ink);
+  --color-surface: var(--color-surface);
+  --color-raised: var(--color-raised);
+  --color-line: var(--color-line);
+  --color-indigo: var(--color-indigo);
+  --color-glow: var(--color-glow);
+  --color-text: var(--color-text);
+  --color-muted: var(--color-muted);
+  --color-registered: var(--color-registered);
+  --color-not-found: var(--color-not-found);
+  --color-expired: var(--color-expired);
+  --color-report: var(--color-report);
+}
+
+html {
+  touch-action: manipulation;
+}
+
+body {
+  background: var(--color-ink);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.5;
+  margin: 0;
+  overflow-x: hidden;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* === Type scale (section 3) === */
+.text-display { font-size: 32px; line-height: 40px; font-weight: 800; }
+.text-title   { font-size: 22px; line-height: 28px; font-weight: 700; }
+.text-section { font-size: 18px; line-height: 24px; font-weight: 800; }
+.text-body    { font-size: 16px; line-height: 24px; font-weight: 500; }
+.text-label   { font-size: 14px; line-height: 20px; font-weight: 700; }
+.text-caption { font-size: 13px; line-height: 18px; font-weight: 500; }
+.text-micro   { font-size: 11px; line-height: 16px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.06em; }
+.text-reg-no  { font-size: 18px; line-height: 22px; font-weight: 500; font-family: var(--font-mono); }
+
+/* Status tints at 14% opacity (dark) / 10% (light) — spec 7.2, 2.3 */
+.tint-registered { background-color: color-mix(in srgb, var(--color-registered) 14%, transparent); }
+.tint-not-found  { background-color: color-mix(in srgb, var(--color-not-found) 14%, transparent); }
+.tint-expired    { background-color: color-mix(in srgb, var(--color-expired) 14%, transparent); }
+.tint-report     { background-color: color-mix(in srgb, var(--color-report) 14%, transparent); }
+.tint-offline    { background-color: color-mix(in srgb, var(--color-not-found) 14%, transparent); }
+
+/* === Component utilities === */
+.border-line { border-color: var(--color-line); }
+.focus-ring-indigo {
+  box-shadow: 0 0 0 2px var(--color-indigo);
+}
+
+/* Glow scan line (spec 4.2: 0 0 18px glow at 60%) */
+.scan-glow {
+  box-shadow: 0 0 18px rgba(124, 131, 255, 0.6);
+}
+[data-theme="light"] .scan-glow {
+  box-shadow: 0 0 18px rgba(75, 73, 242, 0.5);
+}
+
+/* Skeleton shimmer (spec 11 Loading) */
+.skeleton {
+  background: var(--color-raised);
+  border: 1px solid var(--color-line);
+  border-radius: 16px;
+  overflow: hidden;
+  position: relative;
+}
+.skeleton::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.06), transparent);
+  animation: shimmer 2s infinite;
+}
+
+/* Elevation level 1 / 2 borders */
+.surface-1 {
+  background: var(--color-surface);
+  border: 1px solid var(--color-line);
+  border-radius: 16px;
+}
+.raised-2 {
+  background: var(--color-raised);
+  border: 1px solid var(--color-line);
+  border-radius: 12px;
+}
+
+/* Reduced motion: freeze the scan sweep (spec 12) */
+@media (prefers-reduced-motion: reduce) {
+  .animate-sweep, [style*="animation: sweep"] {
+    animation: none !important;
+  }
+  .sweep-static::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, transparent, var(--color-glow), transparent);
+  }
+}
